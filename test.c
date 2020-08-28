@@ -20,12 +20,15 @@ int main() {
 	//covert to a number (like crazy big)...maybe just make a small chunk of the hex
 	//into an int, and then mask? But at that point, I may as well do what I'm doing here
 	
-	for (int i = 0; i < DFLENGTH + 1; i++)
+	for (int i = 0; i < DFLENGTH; i++)
 	{
 		DF[i] = hex[i];
-		printf("%c %c\n", hex[i], DF[i]);
+		DF[i+1] = '\0';
 	}
-	printf("%d\n", DFLENGTH);
-	printf("%lu\n", strlen(DF));
-	printf("hex: %s\n df: %s", hex, DF);
+	for (int i = 0; i < CALENGTH; i++)
+	{
+		CA[i] = hex[i + DFLENGTH];
+		CA[i+1] = '\0';
+	}
+	printf("hex: %s\n df: %s\n ca: %s\n", hex, DF, CA);
 }
