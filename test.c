@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-#define DFLENGTH 5
+
+#define DFCHUNKLENGTH 2
 #define CALENGTH 3
 #define ICAOLENGTH 24
 #define DATALENGTH 56
@@ -8,27 +10,45 @@
 
 int main() {
 	char* hex = "8D4840D6202CC371C32CE0576098";
-	char DF[DFLENGTH + 1];
-	char CA[CALENGTH + 1];
-	char* ICAO;
-	char* DATA;
-	char* TC;
-	char* PI;
-
-	//DF = hex & 0x1f;
-	//I don't think bitmasking works here because the hex string is too large to
-	//covert to a number (like crazy big)...maybe just make a small chunk of the hex
-	//into an int, and then mask? But at that point, I may as well do what I'm doing here
+	char dfChunk[DFCHUNKLENGTH + 1];
+	char caChunk[CALENGTH + 1];
+	char icaoChunk[ICAOLENGTH + 1];
+	char* dataChunk;
+	char* tcChunk;
+	char* piChunk;
+	int temp;
+	int df;
+	int ca;
+	int icao;
+	int data;
+	int tc;
+	int pi;
 	
-	for (int i = 0; i < DFLENGTH; i++)
+	for (int i = 0; i < DFCHUNKLENGTH; i++)
 	{
-		DF[i] = hex[i];
-		DF[i+1] = '\0';
+		dfChunk[i] = hex[i];
+		dfChunk[i+1] = '\0';
 	}
+	temp = atoi(dfChunk);
+	printf("dfChunk: %s\n", dfChunk);
+	printf("temp: %d\n", temp);
+	/**
 	for (int i = 0; i < CALENGTH; i++)
 	{
 		CA[i] = hex[i + DFLENGTH];
 		CA[i+1] = '\0';
 	}
-	printf("hex: %s\n df: %s\n ca: %s\n", hex, DF, CA);
+	for (int i = 0; i < ICAOLENGTH; i++)
+	{
+		ICAO[i] = hex[i + DFLENGTH];
+		ICAO[i+1] = '\0';
+	}**/
+
+	printf("hex:  %s\ndf:   %s\nca:   %s\nicao: %s\n", hex, dfChunk, caChunk, icaoChunk);
 }
+
+
+
+
+
+
