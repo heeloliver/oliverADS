@@ -18,6 +18,7 @@ int main() {
 	char* dataChunk;
 	char* tcChunk;
 	char* piChunk;
+	long hexToLong;
 	int temp;
 	int df;
 	int ca;
@@ -34,6 +35,11 @@ int main() {
 		hexProperlyFormatted[i] = hex[i-2];
 	}
 	printf("hexProperlyFormatted: %s\n", hexProperlyFormatted);
+
+	//need to break into chunks, way too long to put into one int or long :)
+
+	hexToLong = strtol(hexProperlyFormatted, NULL, 0);
+	printf("hexToInt: %ld\n", hexToLong);
 	
 	for (int i = 0; i < DFCHUNKLENGTH; i++)
 	{
