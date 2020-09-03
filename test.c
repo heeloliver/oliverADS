@@ -20,7 +20,7 @@ int main() {
 	char* piChunk;
 	long hexToLong;
 	int temp;
-	int df;
+	long df;
 	int ca;
 	int icao;
 	int data;
@@ -37,18 +37,22 @@ int main() {
 	printf("hexProperlyFormatted: %s\n", hexProperlyFormatted);
 
 	//need to break into chunks, way too long to put into one int or long :)
-
-	hexToLong = strtol(hexProperlyFormatted, NULL, 0);
-	printf("hexToInt: %ld\n", hexToLong);
-	
-	for (int i = 0; i < DFCHUNKLENGTH; i++)
+	char chunk1[9];
+	long chunk1Long;
+	for (int i = 0; i < 8; i++)
 	{
-		dfChunk[i] = hex[i];
-		dfChunk[i+1] = '\0';
+		chunk1[i] = hex[i];
+		chunk1[i+1] = '\0';
 	}
-	temp = atoi(dfChunk);
-	printf("dfChunk: %s\n", dfChunk);
-	printf("temp: %d\n", temp);
+	chunk1Long = strtol(chunk1, NULL, 16);
+	printf("chunk1: %s\n", chunk1);
+	printf("chunk1Long: %ld\n", chunk1Long);
+
+
+	df = chunk1Long & (long)0x88000000;
+	df = df >> 27;
+	printf("df: %ld\n", df);
+
 	/**
 	for (int i = 0; i < CALENGTH; i++)
 	{
@@ -60,8 +64,6 @@ int main() {
 		ICAO[i] = hex[i + DFLENGTH];
 		ICAO[i+1] = '\0';
 	}**/
-
-	printf("hex:  %s\ndf:   %s\nca:   %s\nicao: %s\n", hex, dfChunk, caChunk, icaoChunk);
 }
 
 
