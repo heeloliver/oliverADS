@@ -19,12 +19,11 @@ int main() {
 	char* tcChunk;
 	char* piChunk;
 	long hexToLong;
-	int temp;
 	long df;
 	long ca;
 	long icao;
 	int data;
-	int tc;
+	long tc;
 	int pi;
 
 	printf("hex length: %d\n", hexLength);
@@ -59,6 +58,21 @@ int main() {
 
 	icao = chunk1Long & (long)0xffffff;
 	printf("icao: %ld\n", icao);
+
+	char chunk2[15];
+	long chunk2Long;
+	for (int i = 0; i < 14; i++)
+	{
+		chunk2[i] = hex[i + 8];
+		chunk2[i+1] = '\0';
+	}
+	chunk2Long = strtol(chunk2, NULL, 16);
+	printf("chunk2: %s\n", chunk2);
+	printf("chunk2Long: %ld\n", chunk2Long);
+
+	tc = chunk2Long & (long)0xF8000000000000;
+	tc = tc >> 51;
+	printf("tc: %ld\n", tc);
 
 	
 
