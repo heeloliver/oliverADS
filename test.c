@@ -21,8 +21,8 @@ int main() {
 	long hexToLong;
 	int temp;
 	long df;
-	int ca;
-	int icao;
+	long ca;
+	long icao;
 	int data;
 	int tc;
 	int pi;
@@ -49,9 +49,18 @@ int main() {
 	printf("chunk1Long: %ld\n", chunk1Long);
 
 
-	df = chunk1Long & (long)0x88000000;
+	df = chunk1Long & (long)0xf8000000;
 	df = df >> 27;
 	printf("df: %ld\n", df);
+
+	ca = chunk1Long & (long)0x7000000;
+	ca = ca >> 24;
+	printf("ca: %ld\n", ca);
+
+	icao = chunk1Long & (long)0xffffff;
+	printf("icao: %ld\n", icao);
+
+	
 
 	/**
 	for (int i = 0; i < CALENGTH; i++)
