@@ -22,7 +22,7 @@ int main() {
 	long df;
 	long ca;
 	long icao;
-	int data;
+	long data;
 	long tc;
 	int pi;
 
@@ -74,7 +74,19 @@ int main() {
 	tc = tc >> 51;
 	printf("tc: %ld\n", tc);
 
-	
+	data = chunk2Long;
+	printf("data: %ld\n", chunk2Long);
+
+	char chunk3[25];
+	long chunk3Long;
+	for (int i = 0; i < 24; i++)
+	{
+		chunk3[i] = hex[i + 22];
+		chunk3[i+1] = '\0';
+	}
+	chunk3Long = strtol(chunk3, NULL, 16);
+	printf("chunk3: %s\n", chunk3);
+	printf("chunk3Long: %ld\n", chunk3Long);
 
 	/**
 	for (int i = 0; i < CALENGTH; i++)
