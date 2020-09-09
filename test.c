@@ -8,6 +8,24 @@
 #define DATALENGTH 56
 #define PILENGTH 24 
 
+char decodeChar(uint8_t num)
+{
+	static const char lookup[64] = 
+	{
+		'A', 'B', 'C', 'D', 'E', 'F', 'G',
+		'H', 'I', 'J', 'K', 'L', 'M', 'N',
+		'O', 'P', 'Q', 'R', 'S', 'T', 'U',
+		'V', 'W', 'X', 'Y', 'Z', '#', '#',
+		'#', '#', '#', '_', '#', '#', '#',
+		'#', '#', '#', '#', '#', '#', '#',
+		'#', '#', '#', '#', '#', '0', '1',
+		'2', '3', '4', '5', '6', '7', '8',
+		'9', '#', '#', '#', '#', '#', '#'
+	};
+	char result = lookup[num];
+	return result;
+}
+
 int main() {
 	char* hex = "8D4840D6202CC371C32CE0576098";
 	int hexLength = strlen(hex);
@@ -87,6 +105,51 @@ int main() {
 	chunk3Long = strtol(chunk3, NULL, 16);
 	printf("chunk3: %s\n", chunk3);
 	printf("chunk3Long: %ld\n", chunk3Long);
+
+	char* typeCode;
+	if ((tc > 0) && (tc <= 4)) 
+	{
+		typeCode = "Aircraft Identification";
+	}
+	else if ((tc > 4) && (tc <= 8))
+	{
+		typeCode = "Surface position";
+	}
+	else if ((tc > 8) && (tc <= 18))
+	{
+		typeCode = "Airborne position (w/ baro Altitude)";
+	}
+	else if (tc == 19)
+	{
+		typeCode = "Airborne velocities";
+	}
+	else if ((tc > 19) && (tc <= 22))
+	{
+		typeCode = "Airborne position (w/ GNSS Height)";
+	}
+	else if ((tc > 22) && (tc <= 27))
+	{
+		typeCode = "Reserved";
+	}
+	else if (tc == 28)
+	{
+		typeCode = "Aircraft status";
+	}
+	else if (tc == 29)
+	{
+		typeCode = "Target state and status information";
+	}
+	else if (tc == 31)
+	{
+		typeCode = "Aircraft operation status";
+	}
+	else
+	{
+		typeCode = "Unknown";
+	}
+	printf("Type Code: %s\n", typeCode);
+	char example = decodeChar(1);
+	printf("example decode: %c\n", example);
 
 	/**
 	for (int i = 0; i < CALENGTH; i++)
