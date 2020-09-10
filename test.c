@@ -8,6 +8,17 @@
 #define DATALENGTH 56
 #define PILENGTH 24 
 
+#define AIRCRAFTIDEN 0
+#define SURFACEPOS 1
+#define AIRBORNEPOSBARO 2
+#define AIRBORNEVELO 3
+#define AIRBORNEPOSGNSS 4
+#define RESERVED 5
+#define AIRCRAFTSTAT 6
+#define TARGETSTATE 7
+#define AIRCRAFTOPSTAT 8
+#define UNKNOWN 9
+
 char decodeChar(uint8_t num)
 {
 	static const char lookup[64] = 
@@ -43,6 +54,20 @@ int main() {
 	long data;
 	long tc;
 	int pi;
+	/*
+	Data content is the type of data being transmitted.
+	0 - aircraft iden.
+	1 - surface position
+	2 - airbborne position (w/ baro altitude)
+	3 - airborne velocities
+	4 - airborne position (w/ GNSS height)
+	5 - reserved
+	6 - aircraft status
+	7 - target state and status operation
+	8 - aircraft operation status
+	9 - unknown
+	*/
+	uint8_t dataContent;
 
 	printf("hex length: %d\n", hexLength);
 	hexProperlyFormatted[0] = '0';
@@ -53,7 +78,6 @@ int main() {
 	}
 	printf("hexProperlyFormatted: %s\n", hexProperlyFormatted);
 
-	//need to break into chunks, way too long to put into one int or long :)
 	char chunk1[9];
 	long chunk1Long;
 	for (int i = 0; i < 8; i++)
@@ -110,58 +134,89 @@ int main() {
 	if ((tc > 0) && (tc <= 4)) 
 	{
 		typeCode = "Aircraft Identification";
+		dataContent = AIRCRAFTIDEN;
 	}
 	else if ((tc > 4) && (tc <= 8))
 	{
 		typeCode = "Surface position";
+		dataContent = SURFACEPOS;
 	}
 	else if ((tc > 8) && (tc <= 18))
 	{
 		typeCode = "Airborne position (w/ baro Altitude)";
+		dataContent = AIRBORNEPOSBARO;
 	}
 	else if (tc == 19)
 	{
 		typeCode = "Airborne velocities";
+		dataContent = AIRBORNEVELO;
 	}
 	else if ((tc > 19) && (tc <= 22))
 	{
 		typeCode = "Airborne position (w/ GNSS Height)";
+		dataContent = AIRBORNEPOSGNSS;
 	}
 	else if ((tc > 22) && (tc <= 27))
 	{
 		typeCode = "Reserved";
+		dataContent = RESERVED;
 	}
 	else if (tc == 28)
 	{
 		typeCode = "Aircraft status";
+		dataContent = AIRCRAFTSTAT;
 	}
 	else if (tc == 29)
 	{
 		typeCode = "Target state and status information";
+		dataContent = TARGETSTATE;
 	}
 	else if (tc == 31)
 	{
 		typeCode = "Aircraft operation status";
+		dataContent = AIRCRAFTOPSTAT;
 	}
 	else
 	{
 		typeCode = "Unknown";
+		dataContent = UNKNOWN;
 	}
 	printf("Type Code: %s\n", typeCode);
 	char example = decodeChar(1);
 	printf("example decode: %c\n", example);
 
-	/**
-	for (int i = 0; i < CALENGTH; i++)
+	//TODO: checksum
+
+	if (dataContent == AIRCRAFTIDEN)
 	{
-		CA[i] = hex[i + DFLENGTH];
-		CA[i+1] = '\0';
+		long ec = (data & (long)0x7000000000000);
+		ec = ec >> 48;
+		printf("ec: %ld\n", ec);
+
+		int callsign[8];
+		char callsignConverted[9];
+		long bitwise = 0xFC0000000000;
+		long temp;
+		int shiftBy = 42;
+		for (int i = 0; i < 8; i++)
+		{
+			temp = data & bitwise;
+			temp = temp >> shiftBy;
+			callsign[i] = (int)temp;
+			bitwise = bitwise >> 6;
+			shiftBy -= 6;
+		}
+		for (int i = 0; i < 8; i++)
+		{
+			printf("callsign: %d\n", callsign[i]);
+			callsignConverted[i] = decodeChar(callsign[i] - 1);
+			printf("%c\n", decodeChar(callsign[i] - 1));
+			callsignConverted[i+1] = '\0';
+		}
+		printf("callsign: %s\n", callsignConverted);
+
 	}
-	for (int i = 0; i < ICAOLENGTH; i++)
-	{
-		ICAO[i] = hex[i + DFLENGTH];
-		ICAO[i+1] = '\0';
-	}**/
+
 }
 
 
