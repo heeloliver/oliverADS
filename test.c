@@ -8,24 +8,6 @@
 
 #endif
 
-char decodeChar(uint8_t num)
-{
-	static const char lookup[64] = 
-	{
-		'A', 'B', 'C', 'D', 'E', 'F', 'G',
-		'H', 'I', 'J', 'K', 'L', 'M', 'N',
-		'O', 'P', 'Q', 'R', 'S', 'T', 'U',
-		'V', 'W', 'X', 'Y', 'Z', '#', '#',
-		'#', '#', '#', '_', '#', '#', '#',
-		'#', '#', '#', '#', '#', '#', '#',
-		'#', '#', '#', '#', '#', '0', '1',
-		'2', '3', '4', '5', '6', '7', '8',
-		'9', '#', '#', '#', '#', '#', '#'
-	};
-	char result = lookup[num];
-	return result;
-}
-
 int main() {
 	char* hex = "8D4840D6202CC371C32CE0576098";
 	int hexLength = strlen(hex);
@@ -171,7 +153,7 @@ int main() {
 		dataContent = UNKNOWN;
 	}
 	printf("Type Code: %s\n", typeCode);
-	char example = decodeChar(1);
+	char example = decodeTypeCodeNumber(1);
 	printf("example decode: %c\n", example);
 
 	//TODO: checksum
@@ -198,8 +180,8 @@ int main() {
 		for (int i = 0; i < 8; i++)
 		{
 			printf("callsign: %d\n", callsign[i]);
-			callsignConverted[i] = decodeChar(callsign[i] - 1);
-			printf("%c\n", decodeChar(callsign[i] - 1));
+			callsignConverted[i] = decodeTypeCodeNumber(callsign[i] - 1);
+			printf("%c\n", decodeTypeCodeNumber(callsign[i] - 1));
 			callsignConverted[i+1] = '\0';
 		}
 		printf("callsign: %s\n", callsignConverted);
