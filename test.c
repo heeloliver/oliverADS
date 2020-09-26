@@ -10,8 +10,8 @@
 
 int main() {
 	char* hex = "8D4840D6202CC371C32CE0576098";
-	int hexLength = strlen(hex);
-	char hexProperlyFormatted[hexLength + 3];
+	//int hexLength = strlen(hex);
+	//char hexProperlyFormatted[hexLength + 3];
 	char dfChunk[DFCHUNKLENGTH + 1];
 	char caChunk[CALENGTH + 1];
 	char icaoChunk[ICAOLENGTH + 1];
@@ -40,13 +40,14 @@ int main() {
 	*/
 	uint8_t dataContent;
 
-	printf("hex length: %d\n", hexLength);
+	/*
 	hexProperlyFormatted[0] = '0';
 	hexProperlyFormatted[1] = 'x';
 	for (int i = 2; i < hexLength + 2; i++)
 	{
 		hexProperlyFormatted[i] = hex[i-2];
-	}
+	}*/
+	char* hexProperlyFormatted = formattedHex(hex);
 	printf("hexProperlyFormatted: %s\n", hexProperlyFormatted);
 
 	char chunk1[9];
@@ -187,6 +188,7 @@ int main() {
 		printf("callsign: %s\n", callsignConverted);
 
 	}
+	free(hexProperlyFormatted);
 
 }
 

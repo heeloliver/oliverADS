@@ -19,3 +19,6 @@
 #define AIRCRAFTOPSTAT 8
 #define UNKNOWN 9
 
+char decodeTypeCodeNumber(uint8_t num);
+
+char* formattedHex(char* hex);
