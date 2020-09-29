@@ -12,8 +12,8 @@ int main() {
 
 	// Variables
 	char* hex = "8D4840D6202CC371C32CE0576098";
-	long df;
-	long ca;
+	//long df;
+	//long ca;
 	long icao;
 	long data;
 	long tc;
@@ -41,14 +41,14 @@ int main() {
 	// Chunk 1. Includes df, ca, and icao.
 	long chunk1Long = df_ca_icao_chunk(hex);
 
+	int df = return_df(chunk1Long);
+	printf("df: %d\n", df);
 
-	df = chunk1Long & (long)0xf8000000;
-	df = df >> 27;
-	printf("df: %ld\n", df);
-
+	/*
 	ca = chunk1Long & (long)0x7000000;
-	ca = ca >> 24;
-	printf("ca: %ld\n", ca);
+	ca = ca >> 24;*/
+	int ca = return_ca(chunk1Long);
+	printf("ca: %d\n", ca);
 
 	icao = chunk1Long & (long)0xffffff;
 	printf("icao: %ld\n", icao);

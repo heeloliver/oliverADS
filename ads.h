@@ -24,3 +24,6 @@ char decodeTypeCodeNumber(uint8_t num);
 char* formattedHex(char* hex);
 
 long df_ca_icao_chunk(char* hex);
+int return_df(long chunk);
+int return_ca(long chunk);
+long return_icao(long chunk);
