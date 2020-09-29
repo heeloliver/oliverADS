@@ -30,3 +30,6 @@ long return_icao(long chunk);
 
 long tc_data_chunk(char* hex);
 int return_tc(long chunk);
+
+long parity_data_chunk(char* hex);
+
