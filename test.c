@@ -37,16 +37,9 @@ int main() {
 	printf("hexProperlyFormatted: %s\n", hexProperlyFormatted);
 
 	// Break up the hex into chunks.
-	char chunk1[9];
-	long chunk1Long;
-	for (int i = 0; i < 8; i++)
-	{
-		chunk1[i] = hex[i];
-		chunk1[i+1] = '\0';
-	}
-	chunk1Long = strtol(chunk1, NULL, 16);
-	printf("chunk1: %s\n", chunk1);
-	printf("chunk1Long: %ld\n", chunk1Long);
+
+	// Chunk 1. Includes df, ca, and icao.
+	long chunk1Long = df_ca_icao_chunk(hex);
 
 
 	df = chunk1Long & (long)0xf8000000;
@@ -60,6 +53,7 @@ int main() {
 	icao = chunk1Long & (long)0xffffff;
 	printf("icao: %ld\n", icao);
 
+	// Chunk 2. includes tc and data.
 	char chunk2[15];
 	long chunk2Long;
 	for (int i = 0; i < 14; i++)
@@ -78,6 +72,7 @@ int main() {
 	data = chunk2Long;
 	printf("data: %ld\n", chunk2Long);
 
+	// Chunk 3, includes typeCode...uh
 	char chunk3[25];
 	long chunk3Long;
 	for (int i = 0; i < 24; i++)

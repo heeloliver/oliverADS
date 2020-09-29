@@ -22,3 +22,5 @@
 char decodeTypeCodeNumber(uint8_t num);
 
 char* formattedHex(char* hex);
+
+long df_ca_icao_chunk(char* hex);
