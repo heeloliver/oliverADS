@@ -20,6 +20,8 @@
 #define UNKNOWN 9
 
 char decodeTypeCodeNumber(uint8_t num);
+char* typeCodeLookup(int tc);
+int dataContentLookup(int tc);
 
 char* formattedHex(char* hex);
 

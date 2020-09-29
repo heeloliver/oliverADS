@@ -63,63 +63,14 @@ int main() {
 	long parityLong = parity_data_chunk(hex);
 	printf("chunk3Long: %ld\n", parityLong);
 
-	char* typeCode;
-	if ((tc > 0) && (tc <= 4)) 
-	{
-		typeCode = "Aircraft Identification";
-		dataContent = AIRCRAFTIDEN;
-	}
-	else if ((tc > 4) && (tc <= 8))
-	{
-		typeCode = "Surface position";
-		dataContent = SURFACEPOS;
-	}
-	else if ((tc > 8) && (tc <= 18))
-	{
-		typeCode = "Airborne position (w/ baro Altitude)";
-		dataContent = AIRBORNEPOSBARO;
-	}
-	else if (tc == 19)
-	{
-		typeCode = "Airborne velocities";
-		dataContent = AIRBORNEVELO;
-	}
-	else if ((tc > 19) && (tc <= 22))
-	{
-		typeCode = "Airborne position (w/ GNSS Height)";
-		dataContent = AIRBORNEPOSGNSS;
-	}
-	else if ((tc > 22) && (tc <= 27))
-	{
-		typeCode = "Reserved";
-		dataContent = RESERVED;
-	}
-	else if (tc == 28)
-	{
-		typeCode = "Aircraft status";
-		dataContent = AIRCRAFTSTAT;
-	}
-	else if (tc == 29)
-	{
-		typeCode = "Target state and status information";
-		dataContent = TARGETSTATE;
-	}
-	else if (tc == 31)
-	{
-		typeCode = "Aircraft operation status";
-		dataContent = AIRCRAFTOPSTAT;
-	}
-	else
-	{
-		typeCode = "Unknown";
-		dataContent = UNKNOWN;
-	}
+	// Obtaining typecode.
+	char* typeCode = typeCodeLookup(tc);
 	printf("Type Code: %s\n", typeCode);
-	char example = decodeTypeCodeNumber(1);
-	printf("example decode: %c\n", example);
 
-	//TODO: checksum
+	// Obtaining data content code.
+	dataContent = dataContentLookup(tc);
 
+	// TODO: checksum
 	if (dataContent == AIRCRAFTIDEN)
 	{
 		long ec = (data & (long)0x7000000000000);
@@ -149,7 +100,9 @@ int main() {
 		printf("callsign: %s\n", callsignConverted);
 
 	}
+	
 	free(hexProperlyFormatted);
+	//free(typeCode);
 
 }
 
