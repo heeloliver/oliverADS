@@ -16,11 +16,14 @@ long df_ca_icao_chunk(char* hex)
 	char chunk[9];
 	long chunkLong;
 
+	// Gets the chunk we want.
 	for (int i = 0; i < 8; i++)
 	{
 		chunk[i] = hex[i];
 		chunk[i+1] = '\0';
 	}
+
+	// Converts the hex chunk into a long.
 	chunkLong = strtol(chunk, NULL, 16);
 
 	return chunkLong;

@@ -16,7 +16,7 @@ int main() {
 	//long ca;
 	long icao;
 	long data;
-	long tc;
+	//long tc;
 	/*
 	Data content is the type of data being transmitted.
 	0 - aircraft iden.
@@ -44,30 +44,17 @@ int main() {
 	int df = return_df(chunk1Long);
 	printf("df: %d\n", df);
 
-	/*
-	ca = chunk1Long & (long)0x7000000;
-	ca = ca >> 24;*/
 	int ca = return_ca(chunk1Long);
 	printf("ca: %d\n", ca);
 
-	icao = chunk1Long & (long)0xffffff;
+	icao = return_icao(chunk1Long);
 	printf("icao: %ld\n", icao);
 
 	// Chunk 2. includes tc and data.
-	char chunk2[15];
-	long chunk2Long;
-	for (int i = 0; i < 14; i++)
-	{
-		chunk2[i] = hex[i + 8];
-		chunk2[i+1] = '\0';
-	}
-	chunk2Long = strtol(chunk2, NULL, 16);
-	printf("chunk2: %s\n", chunk2);
-	printf("chunk2Long: %ld\n", chunk2Long);
+	long chunk2Long = tc_data_chunk(hex);
 
-	tc = chunk2Long & (long)0xF8000000000000;
-	tc = tc >> 51;
-	printf("tc: %ld\n", tc);
+	int tc = return_tc(chunk2Long);
+	printf("tc: %d\n", tc);
 
 	data = chunk2Long;
 	printf("data: %ld\n", chunk2Long);
