@@ -9,20 +9,14 @@
 #endif
 
 int main() {
+
+	// Variables
 	char* hex = "8D4840D6202CC371C32CE0576098";
-	//char dfChunk[DFCHUNKLENGTH + 1];
-	//char caChunk[CALENGTH + 1];
-	//char icaoChunk[ICAOLENGTH + 1];
-	//char* dataChunk;
-	//char* tcChunk;
-	//char* piChunk;
-	//long hexToLong;
 	long df;
 	long ca;
 	long icao;
 	long data;
 	long tc;
-	//int pi;
 	/*
 	Data content is the type of data being transmitted.
 	0 - aircraft iden.
@@ -38,10 +32,11 @@ int main() {
 	*/
 	uint8_t dataContent;
 
-	
+	// Format the raw hex to include '0x'
 	char* hexProperlyFormatted = formattedHex(hex);
 	printf("hexProperlyFormatted: %s\n", hexProperlyFormatted);
 
+	// Break up the hex into chunks.
 	char chunk1[9];
 	long chunk1Long;
 	for (int i = 0; i < 8; i++)
