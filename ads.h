@@ -35,3 +35,6 @@ int return_tc(long chunk);
 
 long parity_data_chunk(char* hex);
 
+char* decodeAircraftIdenReturnCallsign(long data);
+char* decodeAircraftIdenReturnEmitter(long data);
+

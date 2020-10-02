@@ -73,36 +73,16 @@ int main() {
 	// TODO: checksum
 	if (dataContent == AIRCRAFTIDEN)
 	{
-		long ec = (data & (long)0x7000000000000);
-		ec = ec >> 48;
-		printf("ec: %ld\n", ec);
+		char* emitterCategory = decodeAircraftIdenReturnEmitter(data);
+		printf("Emitter Category: %s\n", emitterCategory);
 
-		int callsign[8];
-		char callsignConverted[9];
-		long bitwise = 0xFC0000000000;
-		long temp;
-		int shiftBy = 42;
-		for (int i = 0; i < 8; i++)
-		{
-			temp = data & bitwise;
-			temp = temp >> shiftBy;
-			callsign[i] = (int)temp;
-			bitwise = bitwise >> 6;
-			shiftBy -= 6;
-		}
-		for (int i = 0; i < 8; i++)
-		{
-			printf("callsign: %d\n", callsign[i]);
-			callsignConverted[i] = decodeTypeCodeNumber(callsign[i] - 1);
-			printf("%c\n", decodeTypeCodeNumber(callsign[i] - 1));
-			callsignConverted[i+1] = '\0';
-		}
-		printf("callsign: %s\n", callsignConverted);
+		char* callsign = decodeAircraftIdenReturnCallsign(data);
+		printf("Callsign: %s\n", callsign);
 
 	}
-	
+
 	free(hexProperlyFormatted);
-	//free(typeCode);
+	//
 
 }
 
