@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 #define DFCHUNKLENGTH 2
 #define CALENGTH 3
@@ -18,6 +19,8 @@
 #define TARGETSTATE 7
 #define AIRCRAFTOPSTAT 8
 #define UNKNOWN 9
+
+#define NZ 15
 
 char decodeTypeCodeNumber(uint8_t num);
 char* typeCodeLookup(int tc);
@@ -37,4 +40,7 @@ long parity_data_chunk(char* hex);
 
 char* decodeAircraftIdenReturnCallsign(long data);
 char* decodeAircraftIdenReturnEmitter(long data);
+
+int NL(int latitude);
+//int isOddFrame(char* hex);
 

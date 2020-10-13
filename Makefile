@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -pedantic -g
-OBJECTS = test.o hexFunctions.o typeCode.o df_ca_icao_decoder.o tc_data_decoder.o parity_functions.o dataFunctions.o
+OBJECTS = test.o hexFunctions.o typeCode.o df_ca_icao_decoder.o tc_data_decoder.o parity_functions.o dataFunctions.o positionFunctions.o
 
 .PHONY: all
 all: test
@@ -25,6 +25,9 @@ parity_functions: parity_functions.c
 
 dataFunctions: dataFunctions.c
 	$(CC) $(CFLAGS) -O3 -c dataFunctions.c
+
+positionFunctions: positionFunctions.c
+	$(CC) $(CFLAGS) -O3 -c positionFunctions.c
 
 test: $(OBJECTS)
 	$(CC) -o test $(OBJECTS)

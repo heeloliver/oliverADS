@@ -81,6 +81,12 @@ int main() {
 
 	}
 
+	// Now I will demonstrate location and altitude decoding.
+	//char* locationMessage1 = "8D40621D58C382D690C8AC2863A7";
+	//char* locationMessage2 = "8D40621D58C386435CC412692AD6";
+
+
+
 	free(hexProperlyFormatted);
 	//
 
