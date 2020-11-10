@@ -82,10 +82,26 @@ int main() {
 	}
 
 	// Now I will demonstrate location and altitude decoding.
-	//char* locationMessage1 = "8D40621D58C382D690C8AC2863A7";
-	//char* locationMessage2 = "8D40621D58C386435CC412692AD6";
+	char* locationMessage1 = "8D40621D58C382D690C8AC2863A7";
+	char* locationMessage2 = "8D40621D58C386435CC412692AD6";
 
+	if (isOddFrame(locationMessage1))
+	{
+		printf("First message is odd\n");
+	}
+	else
+	{
+		printf("First message is even.\n");
+	}
 
+	if (isOddFrame(locationMessage2))
+	{
+		printf("Second message is odd\n");
+	}
+	else
+	{
+		printf("Second message is even\n");
+	}
 
 	free(hexProperlyFormatted);
 	//
