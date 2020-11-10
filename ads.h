@@ -42,5 +42,7 @@ char* decodeAircraftIdenReturnCallsign(long data);
 char* decodeAircraftIdenReturnEmitter(long data);
 
 int NL(int latitude);
-//int isOddFrame(char* hex);
+int returnOddBit(char* hex);
+int isOddFrame(char* hex);
+
 

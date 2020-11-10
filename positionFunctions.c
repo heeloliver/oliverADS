@@ -32,9 +32,40 @@ int NL(int latitude)
 	}
 }
 
-/*
+int returnOddBit(char* hex)
+{
+	char chunk[10];
+	int bit;
+
+	// Gets the chunk we want.
+	for (int i = 0; i < 9; i++)
+	{
+		chunk[i] = hex[i];
+		chunk[i+1] = '\0';
+	}
+
+	long chunkLong = strtol(chunk, NULL, 16);
+	long bitLong = chunkLong & (long)0x100;
+	bitLong = bitLong >> 8;
+
+	return (int)bitLong;
+}
+
+// Returns if frame is odd. Needs input of bits 0-8 (9 in total)
 int isOddFrame(char* hex)
 {
-	char* nothing = hex;
-	return 0;
-}*/
+	int bit = returnOddBit(hex);
+	
+	if (bit == 0)
+	{
+		return 0;
+	}
+	else if (bit == 1)
+	{
+		return 1;
+	}
+	else
+	{
+		return -1;
+	}
+}
