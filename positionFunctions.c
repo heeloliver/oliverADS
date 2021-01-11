@@ -34,27 +34,26 @@ int NL(int latitude)
 
 int returnOddBit(char* hex)
 {
-	char chunk[10];
+	char chunk[15];
 
 	// Gets the chunk we want.
-	for (int i = 0; i < 9; i++)
+	for (int i = 0; i < 14; i++)
 	{
-		chunk[i] = hex[i];
+		chunk[i] = hex[i + 8];
 		chunk[i+1] = '\0';
 	}
 	printf("chunk: %s\n", chunk);
 
 	long chunkLong = strtol(chunk, NULL, 16);
-	long bitLong = chunkLong & (long)0x100;
+	long bitLong = chunkLong & (long)0x400000000;
 	printf("%ld\n", bitLong);
-	bitLong = bitLong >> 8;
+	bitLong = bitLong >> 34;
 	printf("%ld\n", bitLong);
 
 	return (int)bitLong;
 }
 
 // Returns if frame is odd. Needs input of entire message in hex.
-// DOESN"T WORK!
 int isOddFrame(char* hex)
 {
 	int bit = returnOddBit(hex);
