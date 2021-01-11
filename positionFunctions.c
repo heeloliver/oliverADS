@@ -32,6 +32,52 @@ int NL(int latitude)
 	}
 }
 
+int latIndex(int latCPREven, int latCPROdd)
+{
+	int j;
+
+	j = floor(59 * latCPREven - 60 * latCPROdd + 0.5);
+
+	return j;
+}
+
+long returnCPRLat(char* hex)
+{
+	char dataChunk[15];
+
+	for (int i = 0; i < 14; i++)
+	{
+		dataChunk[i] = hex[i + 8];
+		dataChunk[i + 1] = '\0';
+	}
+
+
+	long dataChunkLong = strtol(dataChunk, NULL, 16);
+	long bitsLong = dataChunkLong & (long)0x3FFFE0000;
+	bitsLong = bitsLong >> 17;
+
+
+	return bitsLong;
+}
+
+long returnCPRLon(char* hex)
+{
+	char dataChunk[15];
+
+	for (int i = 0; i < 14; i++)
+	{
+		dataChunk[i] = hex[i + 8];
+		dataChunk[i + 1] = '\0';
+	}
+
+	printf("data: %s\n", dataChunk);
+
+	long dataChunkLong = strtol(dataChunk, NULL, 16);
+	long bitsLong = dataChunkLong & (long)0x1FFFF;
+
+	return bitsLong;
+}
+
 int returnOddBit(char* hex)
 {
 	char chunk[15];
@@ -42,13 +88,10 @@ int returnOddBit(char* hex)
 		chunk[i] = hex[i + 8];
 		chunk[i+1] = '\0';
 	}
-	printf("chunk: %s\n", chunk);
 
 	long chunkLong = strtol(chunk, NULL, 16);
 	long bitLong = chunkLong & (long)0x400000000;
-	printf("%ld\n", bitLong);
 	bitLong = bitLong >> 34;
-	printf("%ld\n", bitLong);
 
 	return (int)bitLong;
 }

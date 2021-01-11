@@ -92,6 +92,8 @@ int main() {
 	else
 	{
 		printf("First message is even.\n");
+		printf("First location CRP Lat: %li\n", returnCPRLat(locationMessage1));
+		printf("First location CPR Lon: %li\n", returnCPRLon(locationMessage1));
 	}
 
 	if (isOddFrame(locationMessage2))
