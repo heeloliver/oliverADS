@@ -58,7 +58,7 @@ int isOddFrame(char* hex)
 {
 	int bit = returnOddBit(hex);
 	
-	if (bit == 0)
+	if (bit == 0) 
 	{
 		return 0;
 	}
