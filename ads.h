@@ -46,6 +46,8 @@ int latIndex(int latCPREven, int latCPROdd);
 long returnCPRLat(char* hex);
 long returnCPRLon(char* hex);
 int returnOddBit(char* hex);
+double returnCoordinateDecimal(long coord);
+int returnLatIndex(long latCPREven, long latCPROdd);
 int isOddFrame(char* hex);
 
 

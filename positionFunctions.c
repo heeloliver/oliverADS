@@ -96,6 +96,26 @@ int returnOddBit(char* hex)
 	return (int)bitLong;
 }
 
+double returnCoordinateDecimal(long coord)
+{
+	double i = (double)coord / 131072.0; 
+	return (i);
+}
+
+int returnLatIndex(long latCPREven, long latCPROdd)
+{
+	int j;
+
+	j = floor((59 * returnCoordinateDecimal(latCPREven)) - (60 * returnCoordinateDecimal(latCPROdd)) + 0.5);
+
+	return j;
+}
+
+double long returnLatitude(int j, long latCPREven, long latCPROdd)
+{
+	
+}
+
 // Returns if frame is odd. Needs input of entire message in hex.
 int isOddFrame(char* hex)
 {

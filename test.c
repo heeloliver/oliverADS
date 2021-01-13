@@ -105,6 +105,9 @@ int main() {
 		printf("Second message is even\n");
 	}
 
+	printf("Lat Index: %i\n", returnLatIndex(returnCPRLat(locationMessage1), returnCPRLat(locationMessage2)));
+	
+
 	free(hexProperlyFormatted);
 	//
 
