@@ -107,6 +107,7 @@ int main() {
 
 	printf("Lat Index: %i\n", returnLatIndex(returnCPRLat(locationMessage1), returnCPRLat(locationMessage2)));
 	
+	printf("Latitude: %Lf\n", returnLatitude(returnLatIndex(returnCPRLat(locationMessage1), returnCPRLat(locationMessage2)), returnCPRLat(locationMessage1), returnCPRLat(locationMessage2)));
 
 	free(hexProperlyFormatted);
 	//

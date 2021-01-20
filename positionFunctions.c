@@ -111,9 +111,32 @@ int returnLatIndex(long latCPREven, long latCPROdd)
 	return j;
 }
 
-double long returnLatitude(int j, long latCPREven, long latCPROdd)
+
+//double long returnLatitude(int j, long latCPREven, long latCPROdd)
+double long returnLatitude(int j, long latCPREven)
 {
-	
+	double dLatEven = (360 / 60);
+	//double dLatOdd  = (360 / 59);
+
+	double long latEven = dLatEven * ((j % 60) + returnCoordinateDecimal(latCPREven));
+	printf("j: %i, mod: %i\n", j, (j % 60));
+	//double long latOdd  = dLatOdd  * ((59 % j) + returnCoordinateDecimal(latCPROdd));
+
+	if (latEven >= 270)
+	{
+		latEven = latEven - 360;
+	}
+
+	/*
+	if (latOdd >= 270)
+	{
+		latOdd = latOdd - 360;
+	}*/
+
+	//double long lat;
+
+	//TODO: encorporate time stamp
+	return latEven;
 }
 
 // Returns if frame is odd. Needs input of entire message in hex.
