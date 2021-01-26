@@ -50,6 +50,7 @@ double returnCoordinateDecimal(long coord);
 int returnLatIndex(long latCPREven, long latCPROdd);
 //double long returnLatitude(int j, long latCPREven, long latCPROdd);
 double long returnLatitude(int j, long latCPREven);
+double long returnLongitude(long latEven, long longCPREven, long CPROdd);
 int isOddFrame(char* hex);
 
 

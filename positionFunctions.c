@@ -139,6 +139,22 @@ double long returnLatitude(int j, long latCPREven)
 	return latEven;
 }
 
+double long returnLongitude(long latEven, long longCPREven, long longCPROdd)
+{
+	int ni;
+	int ni1 = NL(latEven);
+	if (ni >= 1) ni = ni1;
+	else ni = 1;
+
+	long dLon = 360/ni;
+
+	int m = floor((longCPREven * (NL(latEven) - 1)) - (longCPROdd * NL(latEven)) + 0.5);
+
+	double long longitude = dLon * ((ni % m) + longCPREven);
+
+	return longitude;
+}
+
 // Returns if frame is odd. Needs input of entire message in hex.
 int isOddFrame(char* hex)
 {
