@@ -141,7 +141,7 @@ double long returnLatitude(int j, long latCPREven)
 
 double long returnLongitude(long latEven, long longCPREven, long longCPROdd)
 {
-	int ni;
+	int ni = 0;
 	int ni1 = NL(latEven);
 	if (ni >= 1) ni = ni1;
 	else ni = 1;

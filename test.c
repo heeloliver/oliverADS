@@ -105,9 +105,12 @@ int main() {
 		printf("Second message is even\n");
 	}
 
+	printf("NL test: %i\n", NL(10));
+	printf("NL test: %i\n", NL(15));
+
 	printf("Lat Index: %i\n", returnLatIndex(returnCPRLat(locationMessage1), returnCPRLat(locationMessage2)));
 	
-	printf("Latitude: %Lf\n", returnLatitude(returnLatIndex(returnCPRLat(locationMessage1), returnCPRLat(locationMessage2)), returnCPRLat(locationMessage1), returnCPRLat(locationMessage2)));
+	//printf("Latitude: %Lf\n", returnLatitude(returnLatIndex(returnCPRLat(locationMessage1), returnCPRLat(locationMessage2)), returnCPRLat(locationMessage1), returnCPRLat(locationMessage2)));
 
 	free(hexProperlyFormatted);
 	//
